@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropType from 'prop-types';
 import shortid from 'shortid';
 import Error from './Error';
 
-const Form = ({ addNewExpense }) => {
+const Form = ({ setExpense, saveCreateExpense }) => {
     const[name, setName ] = useState('');
     const [quantity, setQuantity] = useState(0);
     const [error, setError] = useState(false);
@@ -26,10 +27,10 @@ const Form = ({ addNewExpense }) => {
             quantity,
             id: shortid.generate(),
         }
-        console.log(expenses);
 
         // Send the expense to the main component
-        addNewExpense(expenses);
+        setExpense(expenses);
+        saveCreateExpense(true);
 
 
         // Resent form
@@ -81,4 +82,9 @@ const Form = ({ addNewExpense }) => {
      );
 }
  
+Form.propType = {
+    setExpense: PropType.func.isRequired,
+    saveCreateExpense: PropType.func.isRequired,
+
+}
 export default Form;
