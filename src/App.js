@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Question from './Expense.js/Question';
+import Form from './Expense.js/Form';
+import List from './Expense.js/List';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	// Set states
+	const [budget, saveBudget] = useState(0);
+	const [remaining, saveRemaining] = useState(0);
+	const [showQuestion, updateQuestion] = useState(true);
+	const [expenses, setExpenses] = useState([]);
+
+	const addNewExpense = expense => {
+		setExpenses([
+			...expenses,
+			expense
+		])
+	}
+
+	return (
+		<div className="container">
+			<header>
+				<h1>Weekly expense</h1>
+
+				<div className="contenido-principal contenido">
+					{ showQuestion ? (
+						<Question
+							saveBudget={saveBudget}
+							saveRemaining={saveRemaining}
+							updateQuestion={updateQuestion}
+
+						/>
+					)
+					: (
+						<div className="row">
+							<div className="one-half column">
+								<Form
+									addNewExpense={addNewExpense}
+								/>
+							</div>
+							<div className="one-half column">
+								<List
+									expenses={expenses}
+								/>
+							</div>
+						</div>
+					)}
+				</div>
+			</header>
+		</div>
+	);
 }
 
 export default App;
