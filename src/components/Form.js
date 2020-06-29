@@ -24,7 +24,7 @@ const Form = ({ addNewExpense }) => {
         const expenses = {
             name,
             quantity,
-            id: shortid.generate()
+            id: shortid.generate(),
         }
         console.log(expenses);
 
